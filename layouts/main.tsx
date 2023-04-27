@@ -22,7 +22,7 @@ const headerOnly: FC<MyProps> = ({ children }) => {
 		>
 			<Header />
 
-			<main>{children}</main>
+			<main className='relative flex w-full grow'>{children}</main>
 
 			<Footer />
 		</div>
