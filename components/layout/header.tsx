@@ -1,4 +1,4 @@
-import Logo from './logo';
+import Logo from '../general/logo';
 import { Login } from '../svg/icons';
 
 function Header() {
