@@ -14,8 +14,6 @@ function Login() {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 
-	console.log(signInWithEmailAndPasswordACC);
-
 	const signIn = (e: FormEvent) => {
 		e.preventDefault();
 
@@ -40,7 +38,7 @@ function Login() {
 					ref={emailRef}
 					name='Email'
 					placeholder='email'
-					type='password'
+					type='text'
 				/>
 			</div>
 			<div className='relative flex flex-col'>
@@ -52,7 +50,7 @@ function Login() {
 					ref={passwordRef}
 					placeholder='password'
 					name='password'
-					type='text'
+					type='password'
 				/>
 			</div>
 			<button

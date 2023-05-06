@@ -22,14 +22,8 @@ import {
 } from 'firebase/auth';
 
 import { EmailAuthCredential } from 'firebase/auth';
-import { FirestoreError } from '@firebase/firestore-types';
 
 import { queryDoc } from './useFirestore';
-
-interface FormattedUser {
-	uid: string;
-	email: string;
-}
 
 interface AuthDetails {
 	msg: string;
@@ -83,9 +77,22 @@ export default function useFirebaseAuth() {
 			return;
 		}
 		const emailVaild = auth.currentUser?.emailVerified;
-		const profile = queryDoc('profiles', formattedUser.email);
+		try {
+			const profile = await queryDoc('profiles', 'email', formattedUser.email);
 
-		console.log(profile);
+			const setupComplete = profile?.[0].setup;
+			if (!emailVaild) {
+				router.push('./user/email');
+			} else if (!profile) {
+				router.push('./user/setup');
+			} else if (setupComplete) {
+				router.push('./user');
+			} else {
+				router.push('./book/add');
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const clear = (origin: string) => {
