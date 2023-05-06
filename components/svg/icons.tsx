@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-export function Books(props: SVGProps<SVGSVGElement>) {
+export function SVGBooks(props: SVGProps<SVGSVGElement>) {
 	const { width, height, fill, ...rest } = props;
 	return (
 		<svg
@@ -18,7 +18,7 @@ export function Books(props: SVGProps<SVGSVGElement>) {
 	);
 }
 
-export function Login(props: SVGProps<SVGSVGElement>) {
+export function SVGLogin(props: SVGProps<SVGSVGElement>) {
 	const { width, height, fill, ...rest } = props;
 	return (
 		<svg
@@ -36,7 +36,7 @@ export function Login(props: SVGProps<SVGSVGElement>) {
 	);
 }
 
-export function Email(props: SVGProps<SVGSVGElement>) {
+export function SVGEmail(props: SVGProps<SVGSVGElement>) {
 	const { width, height, fill, ...rest } = props;
 	return (
 		<svg
@@ -54,7 +54,7 @@ export function Email(props: SVGProps<SVGSVGElement>) {
 	);
 }
 
-export function Facebook(props: SVGProps<SVGSVGElement>) {
+export function SVGFacebook(props: SVGProps<SVGSVGElement>) {
 	const { width, height, fill, ...rest } = props;
 	return (
 		<svg
@@ -72,7 +72,7 @@ export function Facebook(props: SVGProps<SVGSVGElement>) {
 	);
 }
 
-export function Google(props: SVGProps<SVGSVGElement>) {
+export function SVGGoogle(props: SVGProps<SVGSVGElement>) {
 	const { width, height, fill, ...rest } = props;
 	return (
 		<svg
@@ -86,6 +86,24 @@ export function Google(props: SVGProps<SVGSVGElement>) {
 				fill={fill ?? 'currentColor'}
 				d='M21.456 10.154c.123.659.19 1.348.19 2.067c0 5.624-3.764 9.623-9.449 9.623A9.841 9.841 0 0 1 2.353 12a9.841 9.841 0 0 1 9.844-9.844c2.658 0 4.879.978 6.583 2.566l-2.775 2.775V7.49c-1.033-.984-2.344-1.489-3.808-1.489c-3.248 0-5.888 2.744-5.888 5.993c0 3.248 2.64 5.998 5.888 5.998c2.947 0 4.953-1.685 5.365-3.999h-5.365v-3.839h9.26Z'
 			/>
+		</svg>
+	);
+}
+
+export function SVGSignIn(props: SVGProps<SVGSVGElement>) {
+	const { width, height, fill, ...rest } = props;
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width ?? '1rem'}
+			height={height ?? '1rem'}
+			viewBox='0 0 16 16'
+			{...rest}
+		>
+			<g fill={fill ?? 'currentColor'}>
+				<path d='M12.5 16a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0a3 3 0 0 1 6 0Z' />
+				<path d='M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z' />
+			</g>
 		</svg>
 	);
 }

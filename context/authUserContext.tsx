@@ -15,7 +15,7 @@ interface AuthUserContextType {
 		email: string
 	) => Promise<void>;
 	createUserWithEmailAndPasswordACC: () => Promise<void>;
-	signOut: () => Promise<void>;
+	signOutACC: () => Promise<void>;
 	providerSignin: () => Promise<void>;
 	clearError: () => Promise<void>;
 	resetPassword: () => Promise<void>;
@@ -33,7 +33,7 @@ const authUserContext = createContext<AuthUserContextType>({
 	emailSent: null,
 	signInWithEmailAndPasswordACC: async () => {},
 	createUserWithEmailAndPasswordACC: async () => {},
-	signOut: async () => {},
+	signOutACC: async () => {},
 	providerSignin: async () => {},
 	clearError: async () => {},
 	resetPassword: async () => {},
@@ -42,7 +42,6 @@ const authUserContext = createContext<AuthUserContextType>({
 
 export function AuthUserProvider({ children }: any) {
 	const auth = useFirebaseAuth();
-	console.log(auth);
 	return (
 		<authUserContext.Provider value={auth as unknown as AuthUserContextType}>
 			{children}

@@ -97,7 +97,6 @@ export default function useFirebaseAuth() {
 
 	const clear = (origin: string) => {
 		//clear user states
-
 		if (origin === 'signout') {
 			setSignedOut(true);
 		}

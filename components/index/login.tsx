@@ -5,7 +5,7 @@ import { FormEvent, useRef } from 'react';
 import { useAuth } from '@/context/authUserContext';
 
 /*svgs*/
-import { Email, Facebook, Google } from '../svg/icons';
+import { SVGEmail, SVGFacebook, SVGGoogle } from '../svg/icons';
 
 function Login() {
 	const { signInWithEmailAndPasswordACC, authError, clearError } = useAuth();
@@ -25,7 +25,7 @@ function Login() {
 
 	return (
 		<form
-			className='relative rounded-md flex flex-col mb-3 px-5 gap-5 items-center w-1/2 min-w-[260px] mx-auto mt-5 border border-slate-400/50 justify-around bg-white shadow-xl h-fit'
+			className='relative rounded-md flex flex-col mb-3 px-5 gap-5 items-center w-1/2 min-w-[260px] mx-auto mt-5 border border-slate-400/50 justify-around bg-white shadow-2xl h-fit'
 			onSubmit={signIn}
 		>
 			<p className='mt-2 text-lg font-bold text-stone-800'>Login / Sign-up</p>
@@ -58,7 +58,7 @@ function Login() {
 				type='submit'
 			>
 				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
-					<Email width='2rem' height='2rem' />
+					<SVGEmail width='2rem' height='2rem' />
 				</span>
 				<p className='py-2 text-center grow'>Email</p>
 			</button>
@@ -68,7 +68,7 @@ function Login() {
 				type='submit'
 			>
 				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
-					<Facebook width='2rem' height='2rem' />
+					<SVGFacebook width='2rem' height='2rem' />
 				</span>
 				<p className='py-2 text-center grow'>Facebook</p>
 			</button>
@@ -77,7 +77,7 @@ function Login() {
 				type='submit'
 			>
 				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
-					<Google width='2rem' height='2rem' />
+					<SVGGoogle width='2rem' height='2rem' />
 				</span>
 				<p className='py-2 text-center grow'>Google</p>
 			</button>
