@@ -17,7 +17,7 @@ interface AuthUserContextType {
 	) => Promise<void>;
 	createUserWithEmailAndPasswordACC: () => Promise<void>;
 	signOutACC: () => Promise<void>;
-	providerSignin: () => Promise<void>;
+	providerSignin: (provider: string) => Promise<void>;
 	clearError: () => Promise<void>;
 	resetPassword: () => Promise<void>;
 	validate: () => Promise<void>;

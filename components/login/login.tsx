@@ -24,11 +24,8 @@ function Login() {
 	};
 
 	return (
-		<form
-			className='relative rounded-md flex flex-col mb-3 px-5 gap-5 items-center w-1/2 min-w-[260px] mx-auto mt-5 border border-slate-400/50 justify-around bg-white shadow-2xl h-fit'
-			onSubmit={signIn}
-		>
-			<p className='mt-2 text-lg font-bold text-stone-800'>Login / Sign-up</p>
+		<form className='flex flex-col gap-5 px-2' onSubmit={signIn}>
+			<p className='mt-2 text-2xl font-bold text-stone-800/80'>Login</p>
 			<div className='relative flex flex-col'>
 				<label className='mt-2 ml-1 text-sm font-semibold text-stone-500/80'>
 					Email
@@ -57,29 +54,10 @@ function Login() {
 				className='flex items-center w-56 px-4 mb-2 font-bold text-white rounded bg-slate-900 hover:border-blue-500'
 				type='submit'
 			>
-				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
+				<span className='flex items-center justify-center h-full pr-3 mr-3 text-white border-r-2 border-white'>
 					<SVGEmail width='2rem' height='2rem' />
 				</span>
 				<p className='py-2 text-center grow'>Email</p>
-			</button>
-			<hr className='w-full border bg-slate-900/30 border-slate-900/30' />
-			<button
-				className='flex items-center w-56 px-4 font-bold text-white bg-blue-900 rounded hover:border-blue-500'
-				type='submit'
-			>
-				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
-					<SVGFacebook width='2rem' height='2rem' />
-				</span>
-				<p className='py-2 text-center grow'>Facebook</p>
-			</button>
-			<button
-				className='flex items-center w-56 px-4 mb-4 -mt-3 font-bold text-white bg-red-700 rounded hover:border-blue-500'
-				type='submit'
-			>
-				<span className='h-full pr-3 mr-3 text-white border-r-2 border-white'>
-					<SVGGoogle width='2rem' height='2rem' />
-				</span>
-				<p className='py-2 text-center grow'>Google</p>
 			</button>
 		</form>
 	);

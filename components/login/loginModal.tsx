@@ -6,6 +6,9 @@ import { useAuth } from '@/context/authUserContext';
 
 /*components*/
 import Login from './login';
+import FacebookHandler from './facebookHandler';
+import GoogleHandler from './googleHandler';
+import GithubHandler from './githubHandler';
 
 interface Props {
 	currentState: string;
@@ -22,7 +25,13 @@ const LoginPanel: FC<Props> = ({ currentState }) => {
 			>
 				X
 			</button>
-			<Login />
+			<div className='relative rounded-md flex flex-col mb-3 px-5 gap-5 items-center w-1/2 min-w-[260px] mx-auto mt-5 border border-slate-400/50 justify-around bg-white shadow-2xl h-fit'>
+				<Login />
+				<hr className='w-full border bg-slate-900/30 border-slate-900/30' />
+				<FacebookHandler />
+				<GoogleHandler />
+				<GithubHandler />
+			</div>
 		</div>
 	);
 };
