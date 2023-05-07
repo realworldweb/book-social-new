@@ -4,6 +4,7 @@ import useFirebaseAuth from '../lib/useFirebaseAuth';
 interface AuthUserContextType {
 	authUser: any;
 	loading: boolean;
+	loginPanel: null | string;
 	signedOut: boolean;
 	passPrompt: boolean;
 	linkPrompt: boolean;
@@ -20,10 +21,12 @@ interface AuthUserContextType {
 	clearError: () => Promise<void>;
 	resetPassword: () => Promise<void>;
 	validate: () => Promise<void>;
+	toggleLogin: (purpose?: string) => void;
 }
 
 const authUserContext = createContext<AuthUserContextType>({
 	authUser: null,
+	loginPanel: null,
 	loading: true,
 	signedOut: false,
 	passPrompt: false,
@@ -38,6 +41,7 @@ const authUserContext = createContext<AuthUserContextType>({
 	clearError: async () => {},
 	resetPassword: async () => {},
 	validate: async () => {},
+	toggleLogin: () => {},
 });
 
 export function AuthUserProvider({ children }: any) {

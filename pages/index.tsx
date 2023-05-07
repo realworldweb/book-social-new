@@ -9,7 +9,6 @@ import Layout from '../layouts/main';
 
 /*components*/
 import SvgSocial from '@/components/svg/socialLibary';
-import Login from '@/components/index/login';
 
 export default function Home() {
 	return (
@@ -39,7 +38,6 @@ export default function Home() {
 
 			<div className='relative w-full h-full'>
 				<SvgSocial />
-				<Login />
 			</div>
 		</>
 	);

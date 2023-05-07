@@ -55,6 +55,7 @@ export default function useFirebaseAuth() {
 	const [authError, setAuthError] = useState<AuthDetails | null>(null);
 	const [authSuccess, setAuthSuccess] = useState<AuthDetails | null>(null);
 	const [emailSent, setEmailSent] = useState<boolean | null>(null);
+	const [loginPanel, setLoginPanel] = useState<string | null>(null);
 	const router = useRouter();
 
 	const clearError = () => {
@@ -262,6 +263,21 @@ export default function useFirebaseAuth() {
 			});
 	};
 
+	const toggleLogin = (purpose?: string) => {
+		console.log(purpose);
+		switch (purpose) {
+			case 'login':
+				setLoginPanel('login');
+				return;
+			case 'signup':
+				setLoginPanel('signup');
+				return;
+			default:
+				setLoginPanel(null);
+				return;
+		}
+	};
+
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, authStateChanged);
 		return () => unsubscribe();
@@ -284,6 +300,7 @@ export default function useFirebaseAuth() {
 		authError,
 		authSuccess,
 		emailSent,
+		loginPanel,
 		signInWithEmailAndPasswordACC,
 		createUserWithEmailAndPasswordACC,
 		signOutACC,
@@ -291,5 +308,6 @@ export default function useFirebaseAuth() {
 		clearError,
 		resetPassword,
 		validate,
+		toggleLogin,
 	};
 }
