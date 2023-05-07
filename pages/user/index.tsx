@@ -1,16 +1,14 @@
-/*firebase*/
-import { useAuth } from '@/context/authUserContext';
-import { LoggedIn } from '@/lib/loggedIn';
+import { ReactElement } from 'react';
+
+/*layouts*/
+import Layout from '@/layouts/loggedIn/mainUserArea';
 
 function UserPage() {
-	const { signOutACC } = useAuth();
-	LoggedIn();
-	return (
-		<>
-			<div>UserPage</div>
-			<button onClick={() => signOutACC()}>Sign-out</button>
-		</>
-	);
+	return <div>UserPage</div>;
 }
+
+UserPage.getLayout = function getLayout(page: ReactElement) {
+	return <Layout>{page}</Layout>;
+};
 
 export default UserPage;
