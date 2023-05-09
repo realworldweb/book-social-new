@@ -140,7 +140,7 @@ export default function useFirebaseAuth() {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((result) => {
 				{
-					linkCred && linkAccount(result);
+					if (linkCred) linkAccount(result);
 				} //if action has come through methods function run link accounts
 
 				setSignedOut(false);
@@ -174,8 +174,6 @@ export default function useFirebaseAuth() {
 			.catch((error) => {
 				// Handle Errors here.
 				const errorCode = error.code;
-
-				console.log(error);
 
 				// The firebase.auth.AuthCredential type that was used.
 				const credential = error.credential;
@@ -282,7 +280,6 @@ export default function useFirebaseAuth() {
 	};
 
 	const toggleLogin = (purpose?: string) => {
-		console.log(purpose);
 		switch (purpose) {
 			case 'login':
 				setLoginPanel('login');
