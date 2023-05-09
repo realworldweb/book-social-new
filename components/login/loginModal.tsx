@@ -19,7 +19,7 @@ const LoginPanel: FC<Props> = ({ currentState }) => {
 	const { toggleLogin } = useAuth();
 
 	return (
-		<div className='absolute z-10 flex flex-col items-center justify-center w-full h-full overflow-y-scroll scrollY bg-slate-900/60'>
+		<div className='absolute z-50 flex flex-col items-center justify-center w-full h-full overflow-y-scroll scrollY bg-slate-900/60'>
 			<button
 				className='absolute text-2xl font-extrabold text-white right-4 top-2'
 				onClick={() => toggleLogin()}
