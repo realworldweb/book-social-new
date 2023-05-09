@@ -27,7 +27,7 @@ const LoginPanel: FC<Props> = ({ currentState }) => {
 				X
 			</button>
 			<div
-				className={`relative rounded-md flex flex-col mb-3 px-8 gap-5 items-center w-1/2 min-w-[260px] mx-auto mt-5 border border-slate-400/50 justify-around bg-white shadow-2xl h-fit ${
+				className={`relative rounded-md flex flex-col mb-3 px-8 gap-5 items-center w-1/2 min-w-[260px] max-w-[380px] mx-auto mt-5 md:mt-2 border border-slate-400/50 justify-around bg-white shadow-2xl h-fit ${
 					currentState === 'signup' ? 'mt-52 lg:mt-30' : 'mt-16'
 				}`}
 			>
