@@ -2,7 +2,7 @@
 import Image from 'next/image';
 
 /*images*/
-import heroImg from '@/public/images/book-readers.webp';
+import heroImg from '@/public/images/bookshelfHero.webp';
 
 function Hero() {
 	return (
@@ -13,18 +13,25 @@ function Hero() {
 				style={{
 					objectFit: 'cover',
 					objectPosition: 'center',
+					opacity: 0.7,
 				}}
 				alt='group of book readers'
 			/>
-			<div className='relative flex flex-col items-center justify-center mx-auto w-fit'>
-				<div className='flex p-3 -ml-[200px] text-xl font-extrabold text-white transform skew-x-12 w-fit h-fit bg-lime-300/70 rounded-xl'>
-					Read
-				</div>
-				<div className='flex p-3 -ml-[50px] text-xl font-extrabold text-white transform skew-x-12 w-fit h-fit bg-blue-500/70 rounded-xl'>
-					Grow
-				</div>
-				<div className='flex p-3 ml-[140px] text-xl font-extrabold text-white transform skew-x-12 w-fit h-fit bg-red-400/70 rounded-xl'>
-					Connect
+			<div className='relative z-10 bg-slate-900/50'>
+				<h1 className='mt-1 font-extrabold text-center text-white md:text-xl'>
+					Explore your bookshelf and beyond.
+				</h1>
+				<p className='w-4/5 mx-auto my-2 text-xs font-bold text-center text-white '>
+					Calling all book lovers. Discover new titles, connect with like-minded
+					readers, and explore the boundless universe of literature.
+				</p>
+				<div className='flex items-center justify-center gap-10 mt-2 mb-4'>
+					<button className='flex items-center justify-center px-2 py-1 font-bold text-white border-2 border-white rounded-md hover:bg-white hover:text-black'>
+						Login
+					</button>
+					<button className='flex items-center justify-center px-2 py-1 font-bold bg-white border-2 border-white rounded-md hover:bg-transparent hover:text-white'>
+						Signup
+					</button>
 				</div>
 			</div>
 		</div>

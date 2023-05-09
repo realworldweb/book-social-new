@@ -9,6 +9,7 @@ import Layout from '../layouts/main';
 
 /*components*/
 import SvgSocial from '@/components/svg/socialLibary';
+import Hero from '@/components/index/hero';
 
 export default function Home() {
 	return (
@@ -37,7 +38,7 @@ export default function Home() {
 			</Head>
 
 			<div className='relative w-full h-full'>
-				<SvgSocial />
+				<Hero />
 			</div>
 		</>
 	);
