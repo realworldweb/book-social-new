@@ -145,12 +145,28 @@ export default function useFirebaseAuth() {
 
 				setSignedOut(false);
 			})
-			.catch((error) =>
+			.catch((error) => {
+				if (error.code === 'auth/user-not-found') {
+					setAuthError({
+						msg: 'user not found please sign up',
+						assign: 'login',
+					});
+					return;
+				}
+
+				if (error.code === 'auth/wrong-password') {
+					setAuthError({
+						msg: 'incorrect password or user name',
+						assign: 'login',
+					});
+					return;
+				}
+
 				setAuthError({
 					msg: error.message,
 					assign: 'login',
-				})
-			);
+				});
+			});
 	};
 	const createUserWithEmailAndPasswordACC = (email: string, password: string) =>
 		createUserWithEmailAndPassword(auth, email, password)

@@ -1,11 +1,11 @@
 /*react*/
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useEffect } from 'react';
 
 /*firebase*/
 import { useAuth } from '@/context/authUserContext';
 
 /*svgs*/
-import { SVGEmail, SVGFacebook, SVGGoogle } from '../svg/icons';
+import { SVGEmail } from '../svg/icons';
 
 function Login() {
 	const { signInWithEmailAndPasswordACC, authError, clearError } = useAuth();
@@ -13,6 +13,11 @@ function Login() {
 	/*refs*/
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
+
+	/*useEffects*/
+	useEffect(() => {
+		setTimeout(() => clearError(), 5000);
+	}, [authError]);
 
 	const signIn = (e: FormEvent) => {
 		e.preventDefault();
@@ -27,6 +32,7 @@ function Login() {
 		<form className='flex flex-col gap-5 px-2' onSubmit={signIn}>
 			<p className='mt-2 text-2xl font-bold text-stone-800/80'>Login</p>
 			<div className='relative flex flex-col'>
+				{authError ? <p className='text-red-700'>{authError.msg}</p> : null}
 				<label className='mt-2 ml-1 text-sm font-semibold text-stone-500/80'>
 					Email
 				</label>

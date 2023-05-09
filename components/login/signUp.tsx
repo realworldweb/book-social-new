@@ -1,5 +1,5 @@
 /*react*/
-import { FormEvent, ReactNode, useRef, useState } from 'react';
+import { FormEvent, ReactNode, useRef, useState, useEffect } from 'react';
 
 /*firebase*/
 import { useAuth } from '@/context/authUserContext';
@@ -28,6 +28,27 @@ function SignUp() {
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
 	const passwordErrRef = useRef<HTMLInputElement>(null);
+
+	const clearFieldError = () => {
+		setFieldError(() => {
+			return { field: '', msg: '' };
+		});
+	};
+
+	const clearErrorStates = () =>
+		setTimeout(() => {
+			if (fieldError.msg) {
+				clearFieldError();
+			}
+			if (authError) {
+				clearError();
+			}
+		}, 5000);
+
+	/*useEffects*/
+	useEffect(() => {
+		clearErrorStates();
+	}, [fieldError.msg, authError]);
 
 	const signUp = (e: FormEvent) => {
 		e.preventDefault();
