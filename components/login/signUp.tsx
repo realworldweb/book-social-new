@@ -69,6 +69,7 @@ function SignUp() {
 				field: 'password',
 				msg: ``,
 			});
+			return;
 		}
 
 		if (!confirmPasswordRef.current?.value) {
@@ -97,8 +98,10 @@ function SignUp() {
 				<label className='mt-2 ml-1 text-sm font-semibold text-stone-500/80'>
 					Email
 				</label>
-				{fieldError.field === 'email' ? (
-					<p className='text-center text-red-700'>{fieldError.msg}</p>
+				{fieldError.field === 'email' || authError ? (
+					<p className='text-center text-red-700'>
+						{fieldError.msg ? fieldError.msg : authError.msg}
+					</p>
 				) : null}
 				<input
 					className={`p-1 border rounded shadow-md ${
@@ -118,7 +121,9 @@ function SignUp() {
 				</label>
 
 				<p ref={passwordErrRef} className='text-center text-red-700'>
-					{fieldError.msg ? fieldError.msg : null}
+					{fieldError.msg && fieldError.field === 'password'
+						? fieldError.msg
+						: null}
 				</p>
 
 				<input

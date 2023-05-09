@@ -159,6 +159,8 @@ export default function useFirebaseAuth() {
 				// Handle Errors here.
 				const errorCode = error.code;
 
+				console.log(error);
+
 				// The firebase.auth.AuthCredential type that was used.
 				const credential = error.credential;
 				// catch duplicate acc and set state to be caught by use effect
@@ -167,7 +169,7 @@ export default function useFirebaseAuth() {
 					fetchSignInMethodsForEmail(auth, email).then((methods) => {
 						if (methods.includes('password')) {
 							setAuthError({
-								msg: 'email and password already registered please login',
+								msg: 'email already registered please login',
 								assign: 'signup',
 							});
 						} else {
