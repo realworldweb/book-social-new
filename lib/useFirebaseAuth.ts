@@ -81,7 +81,7 @@ export default function useFirebaseAuth() {
 		try {
 			const profile = await queryDoc('profiles', 'email', formattedUser.email);
 
-			const setupComplete = profile?.[0].setup;
+			const setupComplete = profile?.[0]?.setup;
 			if (!emailVaild) {
 				router.push('./user/email');
 			} else if (!profile) {
