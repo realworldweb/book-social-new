@@ -22,6 +22,7 @@ function Hero() {
 					opacity: 0.7,
 				}}
 				alt='group of book readers'
+				priority
 			/>
 			<div className='relative z-10 bg-slate-900/50 max-w-[450px]'>
 				<h1 className='mt-1 font-extrabold text-center text-white md:text-xl'>
