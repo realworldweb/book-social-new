@@ -10,20 +10,20 @@ interface Props {
 const IndexSection: FC<Props> = ({ svg, heading, para, color }) => {
 	return (
 		<div
-			className={`relative mt-5 mb-5 d-flex ${
+			className={`relative mt-5 mb-5 flex flex-col items-center md:flex-row ${
 				color === 'black' ? 'text-black' : 'text-white'
 			}`}
 		>
-			<div className='relative w-3/5 ml-8'>{svg}</div>
+			<div className='relative w-3/5'>{svg}</div>
 
-			<div className='w-4/5 mx-auto mt-5 realtive'>
+			<div className='relative flex flex-col items-center w-4/5 mx-auto mt-5'>
 				<h2 className={`ml-2 text-xl font-extrabold`}>{heading}</h2>
 				<hr
-					className={`w-4/5 h-1 ml-2 ${
+					className={`w-4/5 h-1 ${
 						color === 'black' ? 'bg-slate-900/50' : 'bg-[#eff6ff]/50'
 					}`}
 				/>
-				<p className='w-4/5 mx-auto mt-2 ml-5 font-semibold'>{para}</p>
+				<p className='w-4/5 px-4 mt-2 font-semibold'>{para}</p>
 			</div>
 		</div>
 	);
