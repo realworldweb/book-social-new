@@ -11,7 +11,7 @@ import Loader from '@/components/general/loader';
 import { Montserrat } from 'next/font/google';
 
 /*firebase*/
-import { LoggedIn } from '@/lib/loggedIn';
+import { LoggedIn } from '@/lib/firebase/loggedIn';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../context/authUserContext';
+import { useAuth } from '../../context/authUserContext';
 
 export const LoggedIn = () => {
 	const { authUser, loading, signedOut } = useAuth();

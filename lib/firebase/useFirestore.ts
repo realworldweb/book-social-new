@@ -1,5 +1,12 @@
 import { db } from './firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import {
+	collection,
+	query,
+	where,
+	getDocs,
+	doc,
+	setDoc,
+} from 'firebase/firestore';
 
 export const getAllDoc = (collectionType: string) => {
 	return;
@@ -27,11 +34,20 @@ export const queryDoc = async (
 	return docs;
 };
 
-/*export const addDoc = (collectionType: string, data: any) => {
-	return db.collection(collection).add(data);
+export const addDoc = async (
+	collectionType: string,
+	docName: string,
+	data: any
+) => {
+	try {
+		console.log(data);
+		await setDoc(doc(db, collectionType, docName), data);
+	} catch (err) {
+		console.error(err);
+	}
 };
 
-export const mergeDoc = async (collection, email, data) => {
+/*export const mergeDoc = async (collection, email, data) => {
 	const docId = await queryDoc(collection, email).then((snapshot) => {
 		return snapshot.docs[0].id;
 	});

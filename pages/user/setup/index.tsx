@@ -6,6 +6,7 @@ import Layout from '@/layouts/loggedIn/mainUserArea';
 
 /*context*/
 import { useAuth } from '@/context/authUserContext';
+import SetupForm from '@/components/setup/setupForm';
 
 const UserSetup = () => {
 	return (
@@ -15,6 +16,7 @@ const UserSetup = () => {
 				Fill out the account details below so we can begin setting up your'e
 				account.
 			</p>
+			<SetupForm />
 		</div>
 	);
 };
