@@ -2,14 +2,12 @@ import Logo from '../general/logo';
 
 /*firebase*/
 import { useAuth } from '@/context/authUserContext';
-import { LoggedIn } from '@/lib/loggedIn';
 
 /*icons*/
 import { SVGSignOut } from '../svg/icons';
 
 function Header() {
 	const { signOutACC } = useAuth();
-	LoggedIn();
 	return (
 		<header className='relative flex items-center justify-between w-full h-20 p-3 bg-indigo-900 shadow-md'>
 			<Logo />

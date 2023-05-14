@@ -144,6 +144,7 @@ export default function useFirebaseAuth() {
 				} //if action has come through methods function run link accounts
 
 				setSignedOut(false);
+				setLoginPanel(null);
 			})
 			.catch((error) => {
 				if (error.code === 'auth/user-not-found') {
@@ -226,6 +227,7 @@ export default function useFirebaseAuth() {
 				if (link) linkAccount(userCredential);
 
 				setSignedOut(false);
+				setLoginPanel(null);
 
 				// ...
 			})
