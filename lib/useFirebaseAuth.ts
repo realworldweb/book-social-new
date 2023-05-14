@@ -83,13 +83,13 @@ export default function useFirebaseAuth() {
 
 			const setupComplete = profile?.[0]?.setup;
 			if (!emailVaild) {
-				router.push('./user/email');
-			} else if (!profile) {
-				router.push('./user/setup');
+				router.push('../user/email');
+			} else if (profile.length === 0) {
+				router.push('../user/setup');
 			} else if (setupComplete) {
 				router.push('./user');
 			} else {
-				router.push('./book/add');
+				router.push('../book/add');
 			}
 		} catch (err) {
 			console.error(err);
