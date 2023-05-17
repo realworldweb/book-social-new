@@ -1,13 +1,13 @@
 interface Profile {
 	email: string;
-	name: string;
 	username: string;
-	profilePic: string;
-	postcode: string;
-	shelves: Array<string>;
-	books: Array<string>;
-	connections: Array<string>;
-	tagline: string;
+	name?: string;
+	img?: string | Blob;
+	postcode?: string;
+	shelves?: Array<string>;
+	books?: Array<string>;
+	connections?: Array<string>;
+	tagline?: string;
 }
 
 interface Notfication {
@@ -41,3 +41,5 @@ interface Book {
 	googleRating: number;
 	userRating: number;
 }
+
+export type { Profile, Notfication, Notifications, Message, Messages, Book };

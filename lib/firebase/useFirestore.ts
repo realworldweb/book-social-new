@@ -8,10 +8,6 @@ import {
 	setDoc,
 } from 'firebase/firestore';
 
-export const getAllDoc = (collectionType: string) => {
-	return;
-};
-
 export const queryDoc = async (
 	collectionType: string,
 	fieldPath: string,
@@ -27,7 +23,6 @@ export const queryDoc = async (
 
 	querySnapshot.forEach((doc) => {
 		// doc.data() is never undefined for query doc snapshots
-		console.log(doc.data());
 		docs.push(doc.data());
 	});
 
@@ -40,7 +35,6 @@ export const addDoc = async (
 	data: any
 ) => {
 	try {
-		console.log(data);
 		await setDoc(doc(db, collectionType, docName), data);
 	} catch (err) {
 		console.error(err);

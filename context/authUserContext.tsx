@@ -1,8 +1,17 @@
+/*react*/
 import { createContext, useContext, Context } from 'react';
+
+/*firebase*/
 import useFirebaseAuth from '../lib/firebase/useFirebaseAuth';
 
+/*types*/
+interface AuthUser {
+	email: string;
+	uid: string;
+}
+
 interface AuthUserContextType {
-	authUser: any;
+	authUser: AuthUser | null;
 	loading: boolean;
 	loginPanel: null | string;
 	signedOut: boolean;

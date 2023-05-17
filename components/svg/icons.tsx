@@ -150,3 +150,21 @@ export function SVGSignOut(props: SVGProps<SVGSVGElement>) {
 		</svg>
 	);
 }
+
+export function SVGImage(props: SVGProps<SVGSVGElement>) {
+	const { width, height, fill, ...rest } = props;
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width ?? '1rem'}
+			height={height ?? '1rem'}
+			viewBox='0 0 24 24'
+			{...rest}
+		>
+			<path
+				fill={fill ?? 'currentColor'}
+				d='M5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21H5Zm1-4h12l-3.75-5l-3 4L9 13l-3 4Z'
+			/>
+		</svg>
+	);
+}

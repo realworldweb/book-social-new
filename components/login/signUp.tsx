@@ -1,5 +1,5 @@
 /*react*/
-import { FormEvent, ReactNode, useRef, useState, useEffect } from 'react';
+import { FormEvent, useRef, useState, useEffect } from 'react';
 
 /*firebase*/
 import { useAuth } from '@/context/authUserContext';
@@ -8,10 +8,7 @@ import { useAuth } from '@/context/authUserContext';
 import { SVGEmail } from '../svg/icons';
 
 /*types*/
-interface FieldError {
-	field: string;
-	msg: string | ReactNode;
-}
+import { FieldError } from '@/lib/types/genricTypes';
 
 function SignUp() {
 	const { createUserWithEmailAndPasswordACC, authError, clearError } =
