@@ -17,6 +17,7 @@ import { upload } from '@/lib/cloudinary/upload';
 /*types*/
 import { FieldError } from '@/lib/types/genricTypes';
 import { Profile } from '@/lib/types/firestoreData';
+import Loader from '../general/loader';
 
 const SetupForm = ({}) => {
 	const { authUser } = useAuth();
@@ -24,7 +25,8 @@ const SetupForm = ({}) => {
 
 	/*state*/
 	const [image, setImage] = useState<string | null>(null);
-	const [error, setError] = useState<FieldError>({
+	const [working, setWorking] = useState(false);
+	const [fieldError, setError] = useState<FieldError>({
 		field: '',
 		msg: '',
 	});
@@ -38,12 +40,15 @@ const SetupForm = ({}) => {
 
 	const createProfile = async () => {
 		if (!username?.current?.value) {
+			//return error if username empty
 			setError({
 				field: 'username',
 				msg: 'Username is required',
 			});
 			return;
 		}
+
+		setWorking(true); //start loader;
 
 		const data: Profile = {
 			email: authUser?.email!,
@@ -56,10 +61,12 @@ const SetupForm = ({}) => {
 		};
 
 		if (data.img) {
+			//if img exists upload
 			data.img = await upload(data, authUser!.email);
 		}
 
 		try {
+			// upload user account details to db
 			await addDoc('profiles', authUser!.uid, data);
 			router.push('../book/add');
 		} catch {
@@ -81,108 +88,125 @@ const SetupForm = ({}) => {
 	};
 
 	return (
-		<form
-			className='flex flex-col gap-5 my-5'
-			onSubmit={(e) => {
-				e.preventDefault();
-				createProfile();
-			}}
-		>
-			<div className='flex gap-10'>
-				<div className='flex flex-col'>
-					<label className='text-xs font-bold text-slate-900/80' htmlFor='name'>
-						Name
-					</label>
-					<input
-						name='name'
-						className='p-1 border rounded shadow-md border-slate-400/50'
-						placeholder='Enter name'
-						type='text'
-						ref={name}
-					/>
-				</div>
-				<div className='flex flex-col'>
-					<label
-						className='text-xs font-bold text-slate-900/80'
-						htmlFor='username'
+		<>
+			{working ? (
+				<Loader purpose='Creating account' />
+			) : (
+				<form
+					className='flex flex-col gap-5 my-5'
+					onSubmit={(e) => {
+						e.preventDefault();
+						createProfile();
+					}}
+				>
+					<div className='flex gap-10'>
+						<div className='flex flex-col'>
+							<label
+								className='text-xs font-bold text-slate-900/80'
+								htmlFor='name'
+							>
+								Name
+							</label>
+							<input
+								name='name'
+								className='p-1 border rounded shadow-md border-slate-400/50'
+								placeholder='Enter name'
+								type='text'
+								ref={name}
+							/>
+						</div>
+						<div className='flex flex-col'>
+							<label
+								className='text-xs font-bold text-slate-900/80'
+								htmlFor='username'
+							>
+								Username
+							</label>
+							{fieldError.field === 'username' ? (
+								<p className='text-center text-red-700'>{fieldError.msg}</p>
+							) : null}
+							<input
+								name='username'
+								className={`p-1 border rounded shadow-md ${
+									fieldError.field === 'username'
+										? 'border-red-400/50'
+										: 'border-slate-400/50'
+								}`}
+								placeholder='Enter username'
+								type='text'
+								ref={username}
+							/>
+						</div>
+					</div>
+					<div className='flex flex-col'>
+						<label
+							className='text-xs font-bold text-slate-900/80'
+							htmlFor='tagline'
+						>
+							Tagline
+						</label>
+						<input
+							name='tagline'
+							placeholder='Enter tagline'
+							className='p-1 border rounded shadow-md border-slate-400/50'
+							type='text'
+							ref={tagline}
+						/>
+					</div>
+					<div className='flex flex-col'>
+						{/*TODO: change to what 3 words or some other localale option which can be used world wide*/}
+						<label
+							className='text-xs font-bold text-slate-900/80'
+							htmlFor='postcode'
+						>
+							Postcode
+						</label>
+						<input
+							name='postcode'
+							className='p-1 border rounded shadow-md border-slate-400/50'
+							placeholder='Enter postcode'
+							type='text'
+							ref={postcode}
+						/>
+					</div>
+					<div>
+						<label
+							className='text-xs font-bold text-slate-900/80'
+							htmlFor='profilepic'
+						>
+							Upload profile pic
+						</label>
+						<div className='relative w-full p-2 bg-slate-900/40'>
+							<p className={`className='text-xs font-bold text-white/80`}>
+								Pic preview:
+							</p>
+							<ProfilePic image={image} />
+							{image ? null : (
+								<p className={`block relative text-center mx-auto`}>
+									No img selected
+								</p>
+							)}
+							<input
+								type='file'
+								ref={img}
+								onChange={(e) => {
+									catchUpload(e);
+								}}
+								accept='image/png, image/jpeg, image/jpg'
+								className='block px-3 py-2 mx-auto my-5 text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
+								id='profilepic'
+							/>
+						</div>
+					</div>
+					<button
+						className='px-3 py-1 mx-auto text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
+						type='submit'
 					>
-						Username
-					</label>
-					<input
-						name='username'
-						className='p-1 border rounded shadow-md border-slate-400/50'
-						placeholder='Enter username'
-						type='text'
-						ref={username}
-					/>
-				</div>
-			</div>
-			<div className='flex flex-col'>
-				<label
-					className='text-xs font-bold text-slate-900/80'
-					htmlFor='tagline'
-				>
-					Tagline
-				</label>
-				<input
-					name='tagline'
-					placeholder='Enter tagline'
-					className='p-1 border rounded shadow-md border-slate-400/50'
-					type='text'
-					ref={tagline}
-				/>
-			</div>
-			<div className='flex flex-col'>
-				<label
-					className='text-xs font-bold text-slate-900/80'
-					htmlFor='postcode'
-				>
-					Postcode
-				</label>
-				<input
-					name='postcode'
-					className='p-1 border rounded shadow-md border-slate-400/50'
-					placeholder='Enter postcode'
-					type='text'
-					ref={postcode}
-				/>
-			</div>
-			<div>
-				<label
-					className='text-xs font-bold text-slate-900/80'
-					htmlFor='profilepic'
-				>
-					Upload profile pic
-				</label>
-				<div className='relative w-full p-2 bg-slate-900/40'>
-					<p className={`className='text-xs font-bold text-white/80`}>
-						Pic preview:
-					</p>
-					<ProfilePic image={image} />
-					{image ? null : (
-						<p className={`block relative text-center mx-auto`}>
-							No img selected
-						</p>
-					)}
-					<input
-						type='file'
-						ref={img}
-						onChange={(e) => {
-							catchUpload(e);
-						}}
-						accept='image/png, image/jpeg, image/jpg'
-						className='block px-3 py-2 mx-auto my-5 text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
-						id='profilepic'
-					/>
-				</div>
-			</div>
-			<button
-				className='px-3 py-1 mx-auto text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
-				type='submit'
-			>
-				Create account
-			</button>
-		</form>
+						Create account
+					</button>
+				</form>
+			)}
+		</>
 	);
 };
 export default SetupForm;
