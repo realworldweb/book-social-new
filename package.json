@@ -10,7 +10,6 @@
 	},
 	"dependencies": {
 		"@firebase/app": "^0.9.9",
-		"axios": "^1.4.0",
 		"cloudinary": "^1.37.0",
 		"firebase": "^9.21.0",
 		"next": "13.3.1",

@@ -1,31 +1,35 @@
-import Axios from 'axios';
-
 import { Profile } from '../types/firestoreData';
 
-const upload = (data: Profile, user: string): Promise<string> => {
-	return new Promise((resolve, reject) => {
-		const formData = new FormData();
-		const url = 'https://api.cloudinary.com/v1_1/dyrsqqf3n/auto/upload';
-		const key: string = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!;
+const upload = async (data: Profile, user: string) => {
+	const formData = new FormData();
+	const key: string = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!;
 
-		formData.append('file', data.img as Blob);
-		formData.append('api_key', key);
-		formData.append('folder', `user/${user}`); //folder name
-		formData.append('upload_preset', 'w8g8ka6c'); //upload preset see cloudinary account settings
+	formData.append('file', data.img as Blob);
+	formData.append('api_key', key);
+	formData.append('folder', `user/${user}`); //folder name
+	formData.append('upload_preset', 'w8g8ka6c'); //upload preset see cloudinary account settings
 
-		Axios.post(url, formData, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		})
-			.then((result) => {
-				resolve(result.data.url);
-			})
-			.catch((err) => {
-				console.error(err);
-				reject(err);
-			});
-	});
+	const requestOptions = {
+		method: 'POST',
+		body: formData,
+	};
+
+	try {
+		const response = await fetch(
+			'https://api.cloudinary.com/v1_1/dyrsqqf3n/auto/upload',
+			requestOptions
+		);
+
+		const result = await response.json();
+
+		if (response.ok) {
+			return result.url;
+		}
+
+		throw new Error(result.message);
+	} catch (err) {
+		console.error(err);
+	}
 };
 
 export { upload };

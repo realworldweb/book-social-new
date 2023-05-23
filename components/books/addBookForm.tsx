@@ -7,9 +7,6 @@ import BookPic from '../general/bookPic';
 /*firebase*/
 import { getDocByName } from '@/lib/firebase/useFirestore';
 
-/*apis*/
-import Axios from 'axios';
-
 /*types*/
 import { Book } from '@/lib/types/firestoreData';
 
