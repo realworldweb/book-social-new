@@ -35,7 +35,7 @@ interface Book {
 	ISBN: string;
 	authors: Array<string>;
 	desc: string;
-	name: string;
+	title: string;
 	pages: number;
 	thumb: string;
 	googleRating: number;

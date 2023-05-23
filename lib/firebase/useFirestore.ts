@@ -4,9 +4,18 @@ import {
 	query,
 	where,
 	getDocs,
+	getDoc,
 	doc,
 	setDoc,
 } from 'firebase/firestore';
+
+export const getDocByName = async (collection: string, name: string) => {
+	//find one document in collection by docID
+	const docRef = doc(db, collection, name);
+	const docSnap = await getDoc(docRef);
+
+	return docSnap.exists() ? docSnap!.data() : null;
+};
 
 export const queryDoc = async (
 	collectionType: string,

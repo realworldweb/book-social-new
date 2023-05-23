@@ -23,7 +23,7 @@ import {
 
 import { EmailAuthCredential } from 'firebase/auth';
 
-import { queryDoc } from './useFirestore';
+import { getDocByName } from './useFirestore';
 
 interface AuthDetails {
 	msg: string;
@@ -79,12 +79,12 @@ export default function useFirebaseAuth() {
 		}
 		const emailVaild = auth.currentUser?.emailVerified;
 		try {
-			const profile = await queryDoc('profiles', 'email', formattedUser.email);
+			const profile = await getDocByName('profiles', formattedUser.uid);
 
-			const setupComplete = profile?.[0]?.setup;
+			const setupComplete = profile?.setup;
 			if (!emailVaild) {
 				router.push('../user/email');
-			} else if (profile.length === 0) {
+			} else if (profile === null) {
 				router.push('../user/setup');
 			} else if (setupComplete) {
 				router.push('./user');
