@@ -93,13 +93,13 @@ const SetupForm = ({}) => {
 				<Loader purpose='Creating account' />
 			) : (
 				<form
-					className='flex flex-col gap-5 my-5'
+					className='flex w-4/5 flex-col gap-5 my-5'
 					onSubmit={(e) => {
 						e.preventDefault();
 						createProfile();
 					}}
 				>
-					<div className='flex gap-10'>
+					<div className='flex flex-col sm:flex-row gap-10'>
 						<div className='flex flex-col'>
 							<label
 								className='text-xs font-bold text-slate-900/80'
@@ -193,7 +193,7 @@ const SetupForm = ({}) => {
 									catchUpload(e);
 								}}
 								accept='image/png, image/jpeg, image/jpg'
-								className='block px-3 py-2 mx-auto my-5 text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
+								className='flex flex-wrap px-3 py-2 mx-auto my-5 text-white rounded-md shadow-lg bg-sky-700 bg w-4/5'
 								id='profilepic'
 							/>
 						</div>
