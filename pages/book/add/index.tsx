@@ -8,14 +8,24 @@ import Layout from '@/layouts/loggedIn/mainUserArea';
 import AddBookForm from '@/components/books/addBookForm';
 
 /*types*/
-import { Book } from '@/lib/types/firestoreData';
+import { Book, UserBook } from '@/lib/types/firestoreData';
 import SearchBookByISBN from '@/components/books/searchBookByISBN';
+import Rating from '@/components/general/rating';
 
 const AddBook = () => {
 	const [bookDetails, setBookDetails] = useState<Book | null>(null);
+	const [userBookDetails, setUserBookDetails] = useState<UserBook>({
+		rating: 0,
+		status: 'too read',
+		tradable: false,
+	});
 
 	const updateBookDetails = (bookDetails: Book) => {
 		setBookDetails(bookDetails);
+	};
+
+	const updateUserBookDetails = (property: string, value: number | string) => {
+		setUserBookDetails((prev: UserBook) => ({ ...prev, [property]: value }));
 	};
 
 	return (
@@ -26,7 +36,18 @@ const AddBook = () => {
 				to get started.
 			</p>
 			<SearchBookByISBN updateBookDetails={updateBookDetails} />
-			{bookDetails ? <AddBookForm book={bookDetails} /> : null}
+			{bookDetails ? (
+				<>
+					<AddBookForm book={bookDetails} />
+					<Rating
+						rating={4}
+						label='User rating'
+						disabled={false}
+						ISBN={bookDetails.ISBN}
+						passRating={updateUserBookDetails}
+					/>
+				</>
+			) : null}
 		</div>
 	);
 };

@@ -39,7 +39,20 @@ interface Book {
 	pages: number;
 	thumb: string;
 	googleRating: number;
-	userRating: number;
 }
 
-export type { Profile, Notfication, Notifications, Message, Messages, Book };
+interface UserBook {
+	rating: number;
+	status: string;
+	tradable: boolean;
+}
+
+export type {
+	Profile,
+	Notfication,
+	Notifications,
+	Message,
+	Messages,
+	Book,
+	UserBook,
+};

@@ -50,22 +50,14 @@ export const addDoc = async (
 	}
 };
 
-/*export const mergeDoc = async (collection, email, data) => {
-	const docId = await queryDoc(collection, email).then((snapshot) => {
-		return snapshot.docs[0].id;
-	});
-
-	const doc = db.collection(collection).doc(docId);
-
-	return doc.set(data, { merge: true });
+export const mergeDoc = async (
+	collectionType: string,
+	docName: string,
+	data: any
+) => {
+	try {
+		await setDoc(doc(db, collectionType, docName), data), { merge: true };
+	} catch (err) {
+		console.error(err);
+	}
 };
-
-export const updateDoc = async (collection, email, data) => {
-	const docId = await queryDoc(collection, email).then((snapshot) => {
-		return snapshot.docs[0].id;
-	});
-
-	const doc = db.collection(collection).doc(docId);
-
-	return doc.set(data, { merge: true });
-};*/

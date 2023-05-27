@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 /*components*/
 import BookPic from '../general/bookPic';
+import Rating from '../general/rating';
 
 /*types*/
 import { Book } from '@/lib/types/firestoreData';
@@ -66,13 +67,11 @@ const AddBookForm: FC<Props> = ({ book }) => (
 				/>
 			</div>
 			<div className='flex flex-col'>
-				<p className='text-xs font-bold text-slate-900/80'>Google rating</p>
-				<input
-					type='text'
-					className='p-1 border rounded shadow-md border-slate-400/50'
-					value={book?.googleRating ?? ''}
-					name='googleRating'
+				<Rating
+					rating={parseInt(String(book?.googleRating))}
+					label='&nbsp;&nbsp;Google rating'
 					disabled={true}
+					ISBN={book.ISBN}
 				/>
 			</div>
 		</div>
