@@ -17,7 +17,6 @@ class Book {
 	pages: number;
 	thumb: string;
 	googleRating: number;
-	userRating: number;
 
 	constructor(ISBN: string, googleBook: GoogleBook) {
 		this.ISBN = ISBN;
@@ -27,7 +26,6 @@ class Book {
 		this.pages = googleBook.pageCount;
 		this.thumb = googleBook.imageLinks.smallThumbnail;
 		this.googleRating = googleBook.averageRating;
-		this.userRating = 0;
 	}
 }
 

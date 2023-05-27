@@ -13,7 +13,7 @@ interface Props {
 }
 
 const AddBookForm: FC<Props> = ({ book }) => (
-	<div className='flex flex-col gap-5 w-4/5 mb-5'>
+	<>
 		<div className='relative flex flex-col h-fit w-full p-2 bg-slate-900/40'>
 			<p className={`className='text-xs font-bold text-white/80`}>
 				Book thumbnail:
@@ -75,6 +75,6 @@ const AddBookForm: FC<Props> = ({ book }) => (
 				/>
 			</div>
 		</div>
-	</div>
+	</>
 );
 export default AddBookForm;
