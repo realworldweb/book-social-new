@@ -12,18 +12,27 @@ import { Book } from '@/lib/functions/books';
 
 interface searchBookByISBNProps {
 	updateBookDetails: Function;
+	setOnServer: Function;
+	setLoader: Function;
 }
 
-const SearchBookByISBN: FC<searchBookByISBNProps> = ({ updateBookDetails }) => {
+const SearchBookByISBN: FC<searchBookByISBNProps> = ({
+	updateBookDetails,
+	setOnServer,
+	setLoader,
+}) => {
 	const ISBN = useRef<HTMLInputElement>(null);
 
 	const findBook = async (ISBN: string) => {
 		if (!ISBN) return;
+		setLoader('finding book');
 		try {
 			const book = await getDocByName('books', ISBN);
 
 			if (book) {
+				setLoader('');
 				updateBookDetails({ ...(book as Book) });
+				setOnServer(true);
 				return;
 			}
 
@@ -31,8 +40,8 @@ const SearchBookByISBN: FC<searchBookByISBNProps> = ({ updateBookDetails }) => {
 			const googleBook = googleReq.items[0].volumeInfo;
 
 			const buildBook = new Book(ISBN, googleBook);
-
-			updateBookDetails(buildBook);
+			setLoader('');
+			updateBookDetails({ ...buildBook });
 		} catch (err) {
 			console.error(err);
 		}

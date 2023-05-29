@@ -35,18 +35,13 @@ const ReadStatus: FC<StatusProps> = ({ status, ISBN, label, passStatus }) => {
 			</label>
 			<select
 				name='status'
+				value={status}
 				className='p-1 border rounded shadow-md border-slate-400/50'
 				onChange={(e) => setSetting(e.target.value)}
 			>
-				<option value='too read' selected={status === 'too read'}>
-					too read
-				</option>
-				<option value='reading' selected={status === 'reading'}>
-					reading
-				</option>
-				<option value='read' selected={status === 'read'}>
-					read
-				</option>
+				<option value='too read'>too read</option>
+				<option value='reading'>reading</option>
+				<option value='read'>read</option>
 			</select>
 		</div>
 	);

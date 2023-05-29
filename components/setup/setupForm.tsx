@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 /*components*/
 import ProfilePic from '../general/profilePic';
+import Loader from '../general/loader';
 
 /*firebase*/
 import { addDoc } from '@/lib/firebase/useFirestore';
@@ -17,7 +18,6 @@ import { upload } from '@/lib/cloudinary/upload';
 /*types*/
 import { FieldError } from '@/lib/types/genricTypes';
 import { Profile } from '@/lib/types/firestoreData';
-import Loader from '../general/loader';
 
 const SetupForm = ({}) => {
 	const { authUser } = useAuth();

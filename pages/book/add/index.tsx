@@ -2,7 +2,7 @@
 import { ReactElement, useState } from 'react';
 
 /*firebase*/
-import { addDoc } from '@/lib/firebase/useFirestore';
+import { addDoc, mergeDoc } from '@/lib/firebase/useFirestore';
 import { useAuth } from '@/context/authUserContext';
 
 /*layouts*/
@@ -17,10 +17,13 @@ import SearchBookByISBN from '@/components/books/searchBookByISBN';
 import Rating from '@/components/general/rating';
 import ReadStatus from '@/components/general/readStatus';
 import TradeSetting from '@/components/general/tradeSeting';
+import Loader from '@/components/general/loader';
 
 const AddBook = () => {
 	const { authUser } = useAuth();
 	const [bookDetails, setBookDetails] = useState<Book | null>(null);
+	const [loader, setLoader] = useState<string | null>(null);
+	const [cached, setCached] = useState<Boolean>(false);
 	const [userBookDetails, setUserBookDetails] = useState<UserBook>({
 		rating: 0,
 		status: 'too read',
@@ -28,25 +31,32 @@ const AddBook = () => {
 	});
 
 	const AddBooktoDB = async () => {
+		setLoader('adding book');
 		try {
-			await addDoc('books', bookDetails!.ISBN, {
-				...bookDetails,
-			});
+			if (!cached) {
+				await addDoc('books', bookDetails!.ISBN, {
+					...bookDetails,
+				});
+			}
 
 			await addDoc(`userBooks/${authUser!.uid}/ISBN`, bookDetails!.ISBN, {
 				...userBookDetails,
 			});
 		} catch (err) {
 			console.error(err);
+		} finally {
+			setLoader(null);
 		}
-	};
-
-	const updateBookDetails = (bookDetails: Book) => {
-		setBookDetails(bookDetails);
 	};
 
 	const updateUserBookDetails = (property: string, value: number | string) => {
 		setUserBookDetails((prev: UserBook) => ({ ...prev, [property]: value }));
+	};
+
+	const completeSetup = async () => {
+		const res = await mergeDoc(`profiles`, authUser!.uid, { setup: true });
+
+		console.log(res);
 	};
 
 	return (
@@ -56,39 +66,57 @@ const AddBook = () => {
 				Add the details of the current books which you have in your collection
 				to get started.
 			</p>
-			<SearchBookByISBN updateBookDetails={updateBookDetails} />
-			{bookDetails ? (
+			{loader ? (
+				<Loader purpose={loader} />
+			) : (
 				<div className='flex flex-col gap-5 w-4/5 mb-5'>
-					<AddBookForm book={bookDetails} />
-					<Rating
-						rating={4}
-						label='User rating'
-						disabled={false}
-						ISBN={bookDetails.ISBN}
-						passRating={updateUserBookDetails}
-					/>
-					<div className='flex w-full justify-around align-center mx-auto'>
-						<ReadStatus
-							status='to read'
-							label='Reading status'
-							ISBN={bookDetails.ISBN}
-							passStatus={updateUserBookDetails}
-						/>
-						<TradeSetting
-							trade={true}
-							label='Tradeable'
-							ISBN={bookDetails.ISBN}
-							passTrade={updateUserBookDetails}
-						/>
+					<div className='w-full flex justify-end'>
+						<button
+							className='relative px-3 py-1 text-white rounded-md shadow-lg bg-red-500 w-fit'
+							onClick={completeSetup}
+						>
+							Skip this step
+						</button>
 					</div>
-					<button
-						className='px-3 py-1 mx-auto text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
-						onClick={AddBooktoDB}
-					>
-						Add Book
-					</button>
+					<SearchBookByISBN
+						updateBookDetails={setBookDetails}
+						setLoader={setLoader}
+						setOnServer={setCached}
+					/>
+					{bookDetails ? (
+						<>
+							<AddBookForm book={bookDetails} />
+							<Rating
+								rating={4}
+								label='User rating'
+								disabled={false}
+								ISBN={bookDetails.ISBN}
+								passRating={updateUserBookDetails}
+							/>
+							<div className='flex w-full justify-around align-center mx-auto'>
+								<ReadStatus
+									status='to read'
+									label='Reading status'
+									ISBN={bookDetails.ISBN}
+									passStatus={updateUserBookDetails}
+								/>
+								<TradeSetting
+									trade={true}
+									label='Tradeable'
+									ISBN={bookDetails.ISBN}
+									passTrade={updateUserBookDetails}
+								/>
+							</div>
+							<button
+								className='px-3 py-1 mx-auto text-white rounded-md shadow-lg bg-sky-700 bg w-fit'
+								onClick={AddBooktoDB}
+							>
+								Add Book
+							</button>
+						</>
+					) : null}
 				</div>
-			) : null}
+			)}
 		</div>
 	);
 };

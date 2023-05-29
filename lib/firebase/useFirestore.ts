@@ -56,7 +56,7 @@ export const mergeDoc = async (
 	data: any
 ) => {
 	try {
-		await setDoc(doc(db, collectionType, docName), data), { merge: true };
+		await setDoc(doc(db, collectionType, docName), data, { merge: true });
 	} catch (err) {
 		console.error(err);
 	}

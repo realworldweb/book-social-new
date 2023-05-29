@@ -35,15 +35,12 @@ const TradeSetting: FC<StatusProps> = ({ trade, ISBN, label, passTrade }) => {
 			</label>
 			<select
 				name='status'
+				value={trade === true ? 'true' : 'false'}
 				onChange={(e) => setSetting(e.target.value)}
 				className='p-1 border rounded shadow-md border-slate-400/50'
 			>
-				<option value='true' selected={trade === true}>
-					true
-				</option>
-				<option value='false' selected={trade === false}>
-					false
-				</option>
+				<option value='true'>true</option>
+				<option value='false'>false</option>
 			</select>
 		</div>
 	);
